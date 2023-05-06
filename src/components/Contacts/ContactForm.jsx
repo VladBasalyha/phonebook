@@ -44,6 +44,7 @@ const ContactForm = () => {
   return (
     <StyledContactForm onSubmit={addContactForm}>
       <InputStyles
+        value={name}
         id="name"
         onChange={setContactValues}
         name="name"
@@ -51,7 +52,12 @@ const ContactForm = () => {
       />
       <InputSpan htmlFor="name">name</InputSpan>
 
-      <InputStyles onChange={setContactValues} name="number" type="text" />
+      <InputStyles
+        value={number}
+        onChange={setContactValues}
+        name="number"
+        type="text"
+      />
       <InputSpan>number</InputSpan>
       <StyledContactsButton type="submit">Add contact</StyledContactsButton>
     </StyledContactForm>

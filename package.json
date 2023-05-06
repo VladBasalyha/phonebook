@@ -2,7 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://VladBasalyha.github.io/contactsBook-7/",
+  "homepage": "https://VladBasalyha.github.io/phonebook/",
   "dependencies": {
     "@emotion/css": "^11.10.8",
     "@emotion/react": "^11.10.8",
