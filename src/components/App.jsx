@@ -3,6 +3,7 @@ import Home from 'pages/Home';
 import { Routes, Route } from 'react-router-dom';
 import Contacts from 'pages/Contacts';
 import Registration from 'pages/Registration';
+import Login from 'pages/SignIn';
 export const App = () => {
 	return (
 		<>
@@ -18,6 +19,7 @@ export const App = () => {
 						path="/registration"
 						element={<Registration></Registration>}
 					></Route>
+					<Route path="/login" element={<Login></Login>}></Route>
 				</Route>
 			</Routes>
 		</>

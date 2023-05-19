@@ -8,6 +8,7 @@ const Header = () => {
 				<NavLink to="home">Home</NavLink>
 				<NavLink to="contacts">Contacts</NavLink>
 				<NavLink to="registration">Registration</NavLink>
+				<NavLink to="login">Login</NavLink>
 			</header>
 			<Outlet>
 				<Suspense fallback={<div>Loading...</div>} />

@@ -1,17 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
 const baseURL =
 	'https://644ef1024e86e9a4d803e476.mockapi.io/collection/contacts';
 
-const userInfoURL = 'https://connections-api.herokuapp.com/users';
+// common URL for our api
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
-const setAuthHeader = token => `Bearer ${token}`;
+const setAuthorizationHeader = token => {
+	axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+const clearAuthorizationHeader = () => {
+	axios.defaults.headers.common.Authorization = '';
+};
 
 export const fetchContacts = createAsyncThunk(
 	'contacts/fetchContacts',
 	async (_, thunkAPI) => {
 		try {
-			const fetching = await fetch(baseURL);
-			const res = await fetching.json();
+			const res = await axios.get('contacts');
 			return res;
 		} catch (error) {
 			console.log(error);
@@ -30,6 +38,7 @@ export const addContact = createAsyncThunk(
 				},
 				body: JSON.stringify(contact),
 			});
+
 			const res = fetching.json();
 			return res;
 		} catch (error) {
@@ -57,21 +66,26 @@ export const registerUser = createAsyncThunk(
 	'user/signUp',
 	async (userData, thunkAPI) => {
 		try {
-			const fetching = await fetch(`${userInfoURL}/signup`, {
-				method: 'POST',
-				body: JSON.stringify(userData),
-				headers: {
-					'Content-type': 'application/json; charset=UTF-8',
-				},
-			});
-			const res = await fetching.json();
-			setAuthHeader(res.token);
-			console.log(setAuthHeader(res.token));
-			return res;
+			const res = await axios.post('users/signup', userData);
+			setAuthorizationHeader(res.data.token);
+			console.log(setAuthorizationHeader(res.data.token));
+			return res.data;
 		} catch (error) {
-			console.log(error);
+			thunkAPI.rejectWithValue(error.message);
 		}
 	}
 );
 
-export const signIn = createAsyncThunk();
+export const signIn = createAsyncThunk(
+	'user/signIn',
+	async (userData, thunkAPI) => {
+		try {
+			const res = await axios.post('users/login', userData);
+			setAuthorizationHeader(res.data.token);
+			console.log(setAuthorizationHeader(res.data.token));
+			return res.data;
+		} catch (error) {
+			thunkAPI.rejectWithValue(error.message);
+		}
+	}
+);
