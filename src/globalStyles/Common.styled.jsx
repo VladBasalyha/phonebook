@@ -1,5 +1,16 @@
 import styled from '@emotion/styled';
 
+export const ItemsWrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+	border: 1px solid black;
+	padding: 5px 10px;
+`;
+export const Text = styled.p`
+	font-size: 14px;
+	font-weight: 700;
+`;
+
 export const Button = styled.button`
 	padding: 20px;
 `;

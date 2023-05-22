@@ -3,7 +3,7 @@ import { Form, InputSpan, InputStyles } from 'globalStyles/Common.styled';
 import { useDispatch } from 'react-redux';
 import { signIn } from 'redux/operations';
 
-const LoginForm = () => {
+const SignIn = () => {
 	const dispatch = useDispatch();
 
 	const toSignIn = e => {
@@ -20,7 +20,7 @@ const LoginForm = () => {
 		<>
 			<Form onSubmit={toSignIn}>
 				<InputStyles type="email" name="email"></InputStyles>
-				<InputSpan>name</InputSpan>
+				<InputSpan>Email</InputSpan>
 				<InputStyles name="password" type="text"></InputStyles>
 				<InputSpan>Password</InputSpan>
 				<StyledContactsButton>Sign In</StyledContactsButton>
@@ -28,4 +28,4 @@ const LoginForm = () => {
 		</>
 	);
 };
-export default LoginForm;
+export default SignIn;

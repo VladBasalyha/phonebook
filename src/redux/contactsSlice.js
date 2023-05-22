@@ -34,11 +34,14 @@ const contactsSlice = createSlice({
 		builder.addCase(deleteContact.pending, (state, action) => {
 			state.contacts.isLoading = true;
 		});
+
 		builder.addCase(deleteContact.fulfilled, (state, action) => {
 			state.contacts.isLoading = false;
+
 			const contactIndex = state.contacts.filteredContacts.findIndex(
 				contact => contact.id === action.payload.id
 			);
+
 			state.contacts.filteredContacts = [
 				...state.contacts.filteredContacts.slice(0, contactIndex),
 				...state.contacts.filteredContacts.slice(contactIndex + 1),
@@ -54,6 +57,7 @@ const contactsSlice = createSlice({
 		});
 		builder.addCase(addContact.fulfilled, (state, action) => {
 			state.contacts.isLoading = false;
+			state.contacts.contacts = [...state.contacts.contacts, action.payload];
 			state.contacts.filteredContacts = [
 				...state.contacts.filteredContacts,
 				action.payload,
@@ -63,9 +67,11 @@ const contactsSlice = createSlice({
 	reducers: {
 		setFilters(state, action) {
 			state.filter = action.payload;
-			state.contacts.filteredContacts = state.contacts.contacts.filter(
-				contact => contact.name.includes(state.filter)
-			);
+			if (state.contacts.contacts) {
+				state.contacts.filteredContacts = state.contacts.contacts.filter(
+					contact => contact.name.includes(state.filter)
+				);
+			}
 		},
 	},
 });
