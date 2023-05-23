@@ -1,5 +1,4 @@
-import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const SignNavigation = () => {
 	return (

@@ -1,4 +1,3 @@
-import { StyledContactsButton } from 'components/Contacts/ContactsList.styled';
 import UserMenu from 'components/UserMenu/UserMenu';
 import { Suspense } from 'react';
 import { useSelector } from 'react-redux';
@@ -8,6 +7,7 @@ import { SignNavigation } from './SignNavigation';
 
 const Header = () => {
 	const signedIn = useSelector(selectUserSignedIn);
+
 	return (
 		<>
 			<header style={{ display: 'flex', gap: '25px' }}>

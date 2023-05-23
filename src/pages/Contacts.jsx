@@ -5,7 +5,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from 'redux/contactsSlice';
 import { fetchContacts } from 'redux/operations';
-import { selectFilteredContacts } from 'redux/selectors';
+import {
+	selectFilteredContacts,
+	selectUserRefreshingStatus,
+} from 'redux/selectors';
 import { selectIsLoading } from 'redux/selectors';
 import { SpinnerCircular } from 'spinners-react';
 
@@ -14,6 +17,7 @@ const Contacts = () => {
 	const onFilterChange = e => {
 		dispatch(setFilters(e.target.value));
 	};
+	const isRefreshingUserStatus = useSelector(selectUserRefreshingStatus);
 	const isLoading = useSelector(selectIsLoading);
 
 	const dispatch = useDispatch();
@@ -23,13 +27,18 @@ const Contacts = () => {
 
 	return (
 		<>
-			<ContactForm></ContactForm>
-
-			<Form>
-				<InputStyles onChange={onFilterChange} type="text"></InputStyles>
-				<InputSpan>filter contacts</InputSpan>
-			</Form>
-			<h1>Contacts</h1>
+			{isRefreshingUserStatus ? (
+				<h2>Loading...</h2>
+			) : (
+				<>
+					<ContactForm></ContactForm>
+					<Form>
+						<InputStyles onChange={onFilterChange} type="text"></InputStyles>
+						<InputSpan>filter contacts</InputSpan>
+					</Form>
+					<h1>Contacts</h1>
+				</>
+			)}
 			{isLoading && (
 				<SpinnerCircular
 					style={{ position: 'fixed', left: '50%' }}

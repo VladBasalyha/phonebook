@@ -1,6 +1,3 @@
-import { useSelector } from 'react-redux';
-import { selectUserEmail, selectUserInfo } from 'redux/selectors';
-
 const Home = () => {
 	return (
 		<main style={{ margin: 'auto' }}>
